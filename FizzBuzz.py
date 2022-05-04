@@ -18,7 +18,7 @@ def binary_encode(i, num_digits):
     return np.array([i >> d & 1 for d in range(num_digits)])
 
 def main():
-    net=newModel().double()
+    net=model.double()
     state_dict=torch.load('./best.pl')
     net.load_state_dict(state_dict['model'])
     # testX = Variable(torch.Tensor([binary_encode(i, NUM_DIGITS) for i in range(1, 101)]))
