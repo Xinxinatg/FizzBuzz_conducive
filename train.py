@@ -10,6 +10,11 @@ X_val=pd.read_csv('X_val.csv')
 y_val=pd.read_csv('y_val.csv')
 trainloader=DataLoader(dataset=Data(X_train,y_train),batch_size=512)
 valloader=DataLoader(dataset=Data(X_val,y_val),batch_size=512)
+model = torch.nn.Sequential(
+    torch.nn.Linear(NUM_DIGITS, 512),
+    # nn.BatchNorm1d(NUM_HIDDEN),
+    torch.nn.ReLU(),
+    torch.nn.Linear(512, 4))
 if not os.path.exists('./Model'):
    os.mkdir('./Model')
 #n_epochs
