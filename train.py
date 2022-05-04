@@ -3,6 +3,20 @@ import numpy as np
 import pandas as pd
 import os
 from sklearn.metrics import accuracy_score
+from torch.utils.data import Dataset, DataLoader
+
+class Data(Dataset):
+    def __init__(self,X,y):
+        # x_tmp=torch.from_numpy(X_train)
+        # y_tmp=torch.from_numpy(y_train)
+        self.x=torch.tensor(X,dtype=torch.int64)
+        self.y=torch.tensor(y,dtype=torch.int64)
+        self.len=self.x.shape[0]
+    def __getitem__(self,index):      
+        return self.x[index], self.y[index]
+    def __len__(self):
+        return self.len
+# data_set=Data()
 n_epochs=1000
 X_train=pd.read_csv('X_train.csv')
 y_train=pd.read_csv('y_train.csv')
