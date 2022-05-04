@@ -2,15 +2,17 @@ import torch
 import numpy as np
 import pandas as pd
 import os
+from tqdm import tqdm
 from sklearn.metrics import accuracy_score
 from torch.utils.data import Dataset, DataLoader
-
+NUM_DIGITS=14
+criterion=torch.nn.CrossEntropyLoss()
 class Data(Dataset):
     def __init__(self,X,y):
         # x_tmp=torch.from_numpy(X_train)
         # y_tmp=torch.from_numpy(y_train)
         self.x=torch.tensor(X,dtype=torch.int64)
-        self.y=torch.tensor(y,dtype=torch.int64)
+        self.y=torch.tensor(y,dtype=torch.int64).squeeze(1)
         self.len=self.x.shape[0]
     def __getitem__(self,index):      
         return self.x[index], self.y[index]
@@ -18,10 +20,11 @@ class Data(Dataset):
         return self.len
 # data_set=Data()
 n_epochs=1000
-X_train=pd.read_csv('X_train.csv')
-y_train=pd.read_csv('y_train.csv')
-X_val=pd.read_csv('X_val.csv')
-y_val=pd.read_csv('y_val.csv')
+X_train=pd.read_csv('X_train.csv').values
+y_train=pd.read_csv('y_train.csv').values
+X_val=pd.read_csv('X_val.csv').values
+y_val=pd.read_csv('y_val.csv').values
+
 trainloader=DataLoader(dataset=Data(X_train,y_train),batch_size=512)
 valloader=DataLoader(dataset=Data(X_val,y_val),batch_size=512)
 model = torch.nn.Sequential(
@@ -40,7 +43,8 @@ for epoch in range(n_epochs):
     model.train()
     val_loss_ls=[]
     loss_list=[]
-    for x, y in tqdm(trainloader):        
+    for x, y in tqdm(trainloader):    
+        # print(y.shape)    
         x=x.double().cuda()
         y=y.cuda()
         #clear gradient 
