@@ -4,10 +4,10 @@
 
 ## Code details
 
-* Users can run the model_inference.py to identify the RBPs. 
+* Users can run FizzBuzz.py to solve the FizzBuzzgame for any input number. 
+* generate_data.py is implemented for generating the dataset for training, validation and tesing. 
+* train.py is implemented for re-training the model for prediction. 
 
-* generate_embeddings.py is implemented for emebeddings generation. 
-* train.py is implemented for re-training the customized deep learning model from scratch. 
 
 
 
