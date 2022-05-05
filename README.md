@@ -39,7 +39,7 @@ pip install -r requirements.txt
     ```
 
 ## Predicting FizzBuzz using trained models:
-- Run the code, please enter a positive integer after the prommt, the positive integer has to be smaller than 16384.
+- Run the code, please enter a positive integer after the prompt, the positive integer has to be smaller than 16384.
     ```
     python FizzBuzz.py
     ```
